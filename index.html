@@ -41,18 +41,25 @@
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
-          SwaggerUIBundle.presets.apis
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
         ],
         plugins: [
           SwaggerUIBundle.plugins.DownloadUrl
         ],
-        layout: "BaseLayout"
+        layout: "StandaloneLayout"
       });
       // End Swagger UI call region
 
       window.ui = ui;
     };
   </script>
+  <style>
+    .swagger-ui .scheme-container,
+    .swagger-ui .topbar {
+      display: none !important;
+    }
+  </style>
 </body>
 
 </html>
