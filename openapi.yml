@@ -23,6 +23,18 @@ components:
       pattern: ^[0-9A-Za-z]{7}$
       example: am89HB4
       description: 7 character base-62 short link
+    healthStatus:
+      type: string
+      enum:
+        - Unhealthy
+        - Degraded
+        - Healthy
+      example: Healthy
+      description: >
+        Health status:
+          * `Unhealthy` - not available
+          * `Degraded` - potentially reduced performance
+          * `Healthy` - fully available
   securitySchemes:
     Standard:
       type: apiKey
@@ -176,17 +188,12 @@ paths:
           content:
             text/plain:
               schema:
-                type: string
-                example: Healthy
-                enum:
-                  - Unhealthy
-                  - Degraded
-                  - Healthy
-                description: >
-                  Health status:
-                   * `Unhealthy` - not available
-                   * `Degraded` - potentially reduced performance
-                   * `Healthy` - fully available
+                $ref: "#/components/schemas/healthStatus"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/healthStatus"
+        "406":
+          description: Content type requested in Accept header is not supported
         "429":
           description: Too many requests
         "500":
